@@ -1,0 +1,5 @@
+- if object.errors.any?
+  span[style="color: red;"]
+    - object.errors.full_messages.uniq.each do |msg|
+      li= msg
+  br

@@ -1,0 +1,51 @@
+= link_to 'Sign Out', destroy_user_session_path, method: :destroy, class: 'nav-link'
+
+
+.col-sm-12
+  .card
+    .card-header
+      h4.card-title
+        | User Details
+    .card-body
+      .row
+        .col-md-3
+          | Email
+        .col-md-3
+          = current_user.email
+
+.col-sm-12
+  .card
+    .card-header
+      h4.card-title
+        | Projects
+    .card-body
+      
+      .tab-content.tab-space
+        #link1.tab-pane.active
+          .row
+            .col-sm-12.col-md-6
+            .col-sm-12.col-md-4
+              
+            .col-sm-12.col-md-2
+              = link_to "Add Project", new_project_path, class: 'btn btn-sm btn-primary'
+          .material-datatables
+            table#datatables.table.table-striped.table-no-bordered.table-hover cellspacing="0" style="width:100%" width="100%" 
+              thead
+                tr
+                  th Name
+                  th Created At
+                  th.disabled-sorting.text-right Actions
+              tbody
+               - @projects.each do |project|
+                tr
+                  td.col-width= project.name
+                  
+                  td= project.created_at.strftime('%d-%m-%Y')
+                  td.text-right.td-actions
+                    = link_to "Edit",edit_project_path(project), title: "Edit project", class: "btn btn-sm btn-primary"
+                      
+                    = link_to tasks_path(project_id: project.id), title: "Task", class: "btn btn-sm btn-primary"
+                      | Tasks
+                    = link_to "Show", project_path(project), title: "Show", class: "btn btn-sm btn-primary"
+                      
+                    = button_to "Delete", project_path(project), :confirm => "Are you sure?", :method => :delete , :class => "btn btn-sm btn-danger"

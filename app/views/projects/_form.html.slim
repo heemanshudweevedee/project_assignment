@@ -1,0 +1,9 @@
+= form_for(@project) do |project_form|
+  = render 'shared/error_message', object: @project
+  .form-group
+    = project_form.label :name, class: 'label.bmd-label-floating'
+    = project_form.text_field :name,  class: 'form-control', required: true
+  
+  = project_form.submit 'Submit'
+  
+  = link_to "Back", :back, class: 'btn btn-sm btn-danger float-right text-bold'
